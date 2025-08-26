@@ -75,12 +75,12 @@ const features = [
   },
 ]
 
-const stats = [
-  { label: "Active Learners", value: "10K+", icon: Users },
-  { label: "AI Tools", value: "500+", icon: Wrench },
-  { label: "Courses", value: "100+", icon: BookOpen },
-  { label: "Success Rate", value: "95%", icon: Target },
-]
+// const stats = [
+//   { label: "Active Learners", value: "10K+", icon: Users },
+//   { label: "AI Tools", value: "500+", icon: Wrench },
+//   { label: "Courses", value: "100+", icon: BookOpen },
+//   { label: "Success Rate", value: "95%", icon: Target },
+// ]
 
 export default function HomePage() {
   return (
@@ -126,7 +126,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section
       <section className="border-b bg-white/50 dark:bg-slate-900/50 py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -146,7 +146,7 @@ export default function HomePage() {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section className="py-24">
@@ -161,39 +161,46 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {features.map((feature, index) => {
-              const Icon = feature.icon
-              return (
-                <Card
-                  key={index}
-                  className="group relative overflow-hidden border-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
-                  />
-                  <CardHeader className="pb-4">
-                    <div
-                      className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ${feature.color}`}
-                    >
-                      <Icon className="h-6 w-6 text-white" />
-                    </div>
-                    <CardTitle className="text-lg font-semibold">{feature.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="mb-4 text-slate-600 dark:text-slate-300">
-                      {feature.description}
-                    </CardDescription>
-                    <Button asChild variant="ghost" className="group-hover:text-blue-600 p-0 h-auto font-medium">
-                      <Link href={feature.href}>
-                        Explore
-                        <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              )
-            })}
+  {features.map((feature, index) => {
+    const Icon = feature.icon
+    return (
+      <Card
+        key={index}
+        className="relative overflow-hidden border-2 transition-all duration-300 hover:shadow-lg group"
+      >
+        {/* 🔥 Changed here: added pointer-events-none */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}
+        ></div>
+
+        <CardHeader className="pb-4">
+          <div
+            className={`w-12 h-12 rounded-lg flex items-center justify-center ${feature.color}`}
+          >
+            <Icon className="h-6 w-6 text-white" />
           </div>
+          <CardTitle className="mt-4">{feature.title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription>{feature.description}</CardDescription>
+          <Button
+            asChild
+            variant="ghost"
+            className="group-hover:text-blue-600 p-0 h-auto font-medium"
+          >
+            <Link href={feature.href}>
+              <span className="flex items-center">
+                Explore
+                <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </Button>
+        </CardContent>
+      </Card>
+    )
+  })}
+</div>
+
         </div>
       </section>
 

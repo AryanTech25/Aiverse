@@ -96,7 +96,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (err: any) {
       console.error("Sign in error:", err.response?.data || err.message)
-      const errorMessage = err.response?.data?.error?.message || err.response?.data?.message || "Sign in failed"
+      const details = err.response?.data?.error?.details
+      const errorMessage = details?.map((d: any) => d.message).join(", ")
+        || err.response?.data?.error?.message
+        || err.response?.data?.message
+        || "Sign in failed"
       setState((prev) => ({
         ...prev,
         loading: false,
@@ -141,7 +145,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } catch (err: any) {
       console.error("Sign up error:", err.response?.data || err.message)
-      const errorMessage = err.response?.data?.error?.message || err.response?.data?.message || "Sign up failed"
+      const details = err.response?.data?.error?.details
+      const errorMessage = details?.map((d: any) => d.message).join(", ")
+        || err.response?.data?.error?.message
+        || err.response?.data?.message
+        || "Sign up failed"
       setState((prev) => ({
         ...prev,
         loading: false,
